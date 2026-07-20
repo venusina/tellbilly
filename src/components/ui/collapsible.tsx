@@ -1,7 +1,6 @@
 import { SymbolView } from 'expo-symbols';
-import { PropsWithChildren, useState } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { Animated, Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -11,6 +10,15 @@ import { useTheme } from '@/hooks/use-theme';
 export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (!isOpen) {
+      opacity.setValue(0);
+      return;
+    }
+    Animated.timing(opacity, { toValue: 1, duration: 200, useNativeDriver: true }).start();
+  }, [isOpen, opacity]);
 
   return (
     <ThemedView>
@@ -30,7 +38,7 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
         <ThemedText type="small">{title}</ThemedText>
       </Pressable>
       {isOpen && (
-        <Animated.View entering={FadeIn.duration(200)}>
+        <Animated.View style={{ opacity }}>
           <ThemedView type="backgroundElement" style={styles.content}>
             {children}
           </ThemedView>

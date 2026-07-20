@@ -131,3 +131,76 @@ export const Theme = {
 } as const;
 
 export type AppTheme = typeof Theme;
+
+// ---------------------------------------------------------------------------
+// Component-facing tokens
+//
+// A second, flatter token set matching the naming the TellBilly component
+// library (src/components) is built against — e.g. `theme.colors.accent.primary`,
+// `theme.colors.border.strong`. Kept separate from `Theme` above so existing
+// consumers of `Colors`/`Semantic`/`Typography` aren't disturbed.
+// ---------------------------------------------------------------------------
+
+export const theme = {
+  colors: {
+    primary: {
+      500: Colors.primary,
+      800: '#141b2b',
+    },
+    text: {
+      primary: '#141b2b',
+      secondary: Colors.neutral[500],
+      inverse: Colors.neutral.white,
+    },
+    accent: {
+      primary: '#5246d4',
+      light: '#e1e0ff',
+      subtle: '#f1f3ff',
+    },
+    border: {
+      default: '#d9d9d9',
+      strong: '#c6c6cc',
+    },
+    background: {
+      primary: Colors.neutral.white,
+      secondary: '#f6f6f6',
+    },
+    status: {
+      success: '#16a34a',
+      warning: '#f59e0b',
+      error: '#ba1a1a',
+    },
+  },
+  typography: {
+    h1: { fontSize: 32, lineHeight: 40, fontWeight: '700' },
+    body: { fontSize: 16, lineHeight: 24, fontWeight: '400' },
+    button: { fontSize: 16, lineHeight: 24, fontWeight: '600' },
+    label: { fontSize: 14, lineHeight: 20, fontWeight: '600' },
+  },
+  /** 4dp-grid spacing scale, indexed 0-8 (e.g. `theme.spacing[2]` === 8). */
+  spacing: [0, 4, 8, 12, 16, 24, 32, 48, 64],
+  radius: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+    '2xl': 24,
+    full: 9999,
+  },
+  elevation: Elevation,
+} as const satisfies {
+  colors: {
+    primary: Record<number, string>;
+    text: Record<string, string>;
+    accent: Record<string, string>;
+    border: Record<string, string>;
+    background: Record<string, string>;
+    status: Record<string, string>;
+  };
+  typography: Record<string, { fontSize: number; lineHeight: number; fontWeight: '400' | '600' | '700' }>;
+  spacing: readonly number[];
+  radius: Record<string, number>;
+  elevation: typeof Elevation;
+};
+
+export type ComponentTheme = typeof theme;

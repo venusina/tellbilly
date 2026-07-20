@@ -114,7 +114,7 @@ export default function TabTwoScreen() {
             <ThemedText type="small">
               This template includes an example of an animated component. The{' '}
               <ThemedText type="code">src/components/ui/collapsible.tsx</ThemedText> component uses
-              the powerful <ThemedText type="code">react-native-reanimated</ThemedText> library to
+              React Native&apos;s built-in <ThemedText type="code">Animated</ThemedText> API to
               animate opening this hint.
             </ThemedText>
           </Collapsible>

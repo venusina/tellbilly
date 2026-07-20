@@ -16,14 +16,14 @@
  */
 
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
+    createContext,
+    useCallback,
+    useContext,
+    useMemo,
+    useState,
+    type Dispatch,
+    type ReactNode,
+    type SetStateAction,
 } from 'react';
 
 import type { Job, VoiceCommand } from '@/types';
